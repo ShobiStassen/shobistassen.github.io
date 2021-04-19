@@ -1,85 +1,44 @@
+<!DOCTYPE html>
+<html>
 <head>
-  <style> body { margin: 0; } </style>
-
-  <script src="https://unpkg.com/3d-force-graph"></script>
-  <script src="https://d3js.org/d3.v4.min.js"></script>
-
-  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-  <!--<script src="../../dist/3d-force-graph.js"></script>-->
-</head>
-
-<body>
-<div id="3d-graph"></div>
-
-<script>
-const gData = {
-    "nodes": [
-        {
-          "id": "id1",
-          "name": "name1",
-          "val": 1
-        },
-        {
-          "id": "id2",
-          "name": "name2",
-          "val": 3
-        },
-        {
-          "id": "id3",
-          "name": "name3",
-          "val": 8
-        },
-        {
-          "id": "id4",
-          "name": "name4",
-          "val": 10
-        },
-    ],
-    "links": [
-        {
-            "source": "id1",
-            "target": "id2",
-            "distance":100,
-            "width": 1
-
-        },
-        {
-            "source": "id2",
-            "target": "id3",
-            "distance":20,
-            "width": 3
-
-        },
-        {
-            "source": "id2",
-            "target": "id4",
-            "distance":20,
-            "width": 3
-
-        },
-
-    ]
+<style>
+body {
+    background-color: #5A87CD;font-family: courier; margin: 0
 }
-  /*
-  var colors = d3.scaleQuantize()
-    .domain([0,10])
-    .range(["#5E4FA2", "#3288BD", "#66C2A5", "#ABDDA4", "#E6F598",
-    "#FFFFBF", "#FEE08B", "#FDAE61", "#F46D43", "#D53E4F", "#9E0142"]);
-  */
+h1 {
+    background-color: #5A87CD;font-family: courier;
+}
+p {
+    background-color: #5A87CD; font-family: courier;
+}
+</style>
+<script src="https://unpkg.com/3d-force-graph"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="bifurc.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+</head>
+<body>
+  <h1>4-Leaf Multifurcation</h1>
+  <p>Interactive force directed layout</p>
+  <div id="3d-graph"></div>
+  <script>
 
-  var colors = d3.scaleSequential().domain([1,10])
-    .interpolator(d3.interpolateViridis);
-  const Graph = ForceGraph3D({ controlType: 'orbit' })
-  (document.getElementById('3d-graph'))
-    //.jsonUrl('https://raw.githubusercontent.com/vasturiano/3d-force-graph/master/example/datasets/miserables.json')
-    //.jsonUrl('file://localhost/home/shobi/JavaCode/basicgraph/bifurc.json')
-    //https://stackoverflow.com/questions/50360821/how-do-i-influence-link-distance-in-3d-force-graph
-    .nodeLabel('id')
-    //.nodeAutoColorBy('val')
-    .graphData(gData)
-    .nodeColor(d=>colors(d.val))
-    .linkWidth('width')
-    .d3Force("link", d3.forceLink().distance(d => d.distance))
-    .d3Force("charge", d3.forceManyBody().theta(0.5).strength(-1));;
-</script>
+    var colors = d3.scaleSequential().domain([1,10])
+      .interpolator(d3.interpolateViridis);
+    const Graph = ForceGraph3D({ controlType: 'orbit' })
+    (document.getElementById('3d-graph'))
+      //.jsonUrl('https://raw.githubusercontent.com/vasturiano/3d-force-graph/master/example/datasets/miserables.json')
+      //.jsonUrl('file://localhost/home/shobi/JavaCode/basicgraph/bifurc.json')
+      //https://stackoverflow.com/questions/50360821/how-do-i-influence-link-distance-in-3d-force-graph
+      .backgroundColor("#0B2752")
+      .nodeLabel('id')
+      //.nodeAutoColorBy('val')
+      .nodeVal(5) //size of nodes
+      .graphData(gData)
+      .nodeColor(d=>colors(d.time))
+      .linkWidth('width')
+      .d3Force("link", d3.forceLink().distance(d => d.distance))
+      .d3Force("charge", d3.forceManyBody().theta(0.5).strength(-100));
+  </script>
 </body>
+</html>

@@ -22,7 +22,108 @@ p {
   <p>Interactive force directed layout</p>
   <div id="3d-graph"></div>
   <script>
+  var gData = {
+      "nodes": [
+          {
+            "id": "id1",
+            "name": "name1",
+            "time": 1
+          },
+          {
+            "id": "id2",
+            "name": "name2",
+            "time": 3
+          },
+          {
+            "id": "id3",
+            "name": "name3",
+            "time": 6        },
+          {
+            "id": "id4",
+            "name": "name4",
+            "time": 6
+          },
+          {
+            "id": "id5",
+            "name": "name3",
+            "time": 10
+          },
+          {
+            "id": "id6",
+            "name": "name4",
+            "time": 10
+          },
+          {
+            "id": "id7",
+            "name": "name3",
+            "time": 10
+          },
+          {
+            "id": "id8",
+            "name": "name4",
+            "timete": 10
+          },
+      ],
+      "links": [
+          {
+              "source": "id1",
+              "target": "id2",
+              "distance":100,
+              "width": 1
 
+          },
+          {
+              "source": "id2",
+              "target": "id3",
+              "distance":100,
+              "width": 2
+
+          },
+          {
+              "source": "id2",
+              "target": "id4",
+              "distance":100,
+              "width": 2
+
+          },
+          {
+              "source": "id4",
+              "target": "id5",
+              "distance":20,
+              "width": 2
+
+          },
+          {
+              "source": "id4",
+              "target": "id7",
+              "distance":20,
+              "width": 2
+
+          },
+          {
+              "source": "id3",
+              "target": "id6",
+              "distance":20,
+              "width": 2
+
+          },
+          {
+              "source": "id3",
+              "target": "id8",
+              "distance":20,
+              "width": 2
+
+          },
+          {
+              "source": "id7",
+              "target": "id5",
+              "distance":10,
+              "width": 2
+
+          },
+
+      ]
+  }
     var colors = d3.scaleSequential().domain([1,10])
       .interpolator(d3.interpolateViridis);
     const Graph = ForceGraph3D({ controlType: 'orbit' })

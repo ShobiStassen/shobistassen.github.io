@@ -3,7 +3,7 @@
 <head>
 <style>
 body {
-    background-color: #0B2752;font-family: sans-serif; margin: 0
+    background-color: #0B2752;font-family: sans-serif;  margin: 0
 }
 h1 {
     background-color: #0B2752;font-family: sans-serif;
@@ -20,6 +20,7 @@ p {
 <body>
   <h1 style="color: white;"> 4-Leaf Multifurcation</h1>
   <p style="color:white; font-size:20px">Interactive force directed layout of VIA graph colored by pseudotime</p>
+  <!--<p> Interactive force directed layout of VIA graph colored by pseudotime</p>-->
   <div id="3d-graph"></div>
   <script>
   var gData = {
@@ -105,92 +106,92 @@ p {
     ],
     "links": [
       {
-        "weight": 4.0,
-        "width": 4.0,
+        "weight": 8.0,
+        "val": 7.0,
         "distance": 25.0,
         "source": 0,
         "target": 12.0
       },
       {
-        "weight": 1.0,
-        "width": 1.0,
+        "weight": 2.0,
+        "val": 4.0,
         "distance": 100.0,
         "source": 0,
         "target": 10.0
       },
       {
-        "weight": 2.75,
-        "width": 2.75,
+        "weight": 5.5,
+        "val": 4.0,
         "distance": 36.36363636,
         "source": 1,
         "target": 8.0
       },
       {
-        "weight": 1.0,
-        "width": 1.0,
+        "weight": 2.0,
+        "val": 2.0,
         "distance": 100.0,
         "source": 1,
         "target": 5.0
       },
       {
-        "weight": 4.0,
-        "width": 4.0,
+        "weight": 8.0,
+        "val": 3.0,
         "distance": 25.0,
         "source": 2,
         "target": 4.0
       },
       {
-        "weight": 1.5,
-        "width": 1.5,
+        "weight": 3.0,
+        "val": 7.0,
         "distance": 66.66666667,
         "source": 3,
         "target": 0.0
       },
       {
-        "weight": 1.0,
-        "width": 1.0,
+        "weight": 2.0,
+        "val": 5.0,
         "distance": 100.0,
         "source": 4,
         "target": 11.0
       },
       {
-        "weight": 1.0,
-        "width": 1.0,
+        "weight": 2.0,
+        "val": 5.0,
         "distance": 100.0,
         "source": 4,
         "target": 7.0
       },
       {
-        "weight": 1.5,
-        "width": 1.5,
+        "weight": 3.0,
+        "val": 9.0,
         "distance": 66.66666667,
         "source": 6,
         "target": 3.0
       },
       {
-        "weight": 2.75,
-        "width": 2.75,
+        "weight": 5.5,
+        "val": 4.0,
         "distance": 36.36363636,
         "source": 8,
         "target": 9.0
       },
       {
-        "weight": 2.75,
-        "width": 2.75,
+        "weight": 5.5,
+        "val": 4.0,
         "distance": 36.36363636,
         "source": 10,
         "target": 1.0
       },
       {
-        "weight": 1.5,
-        "width": 1.5,
+        "weight": 3.0,
+        "val": 3.0,
         "distance": 66.66666667,
         "source": 11,
         "target": 7.0
       },
       {
-        "weight": 1.5,
-        "width": 1.5,
+        "weight": 3.0,
+        "val": 4.0,
         "distance": 66.66666667,
         "source": 12,
         "target": 2.0
@@ -210,10 +211,15 @@ p {
       .graphData(gData)
       .nodeColor(d=>colors(d.pseudotime))
       .nodeLabel(d=>d.group)
-      .linkWidth('width')
+      .linkWidth('weight')
       .d3Force("link", d3.forceLink().distance(d => d.distance))
       .linkDirectionalArrowLength(10)
-      .d3Force("charge", d3.forceManyBody().theta(0.5).strength(-100));
+      .linkColor(link => 'gray' )
+      .linkOpacity(0.5)
+      .d3Force("charge", d3.forceManyBody().theta(0.5).strength(-100))
+      .linkDirectionalParticles('val')
+      .linkDirectionalParticleSpeed(d => d.val*0.001)
+      .linkDirectionalParticleWidth(3);
   </script>
 </body>
 </html>

@@ -56,19 +56,19 @@ p {
         "id": 4
       },
       {
-        "group": "M6",
+        "group": "M6 (leaf)",
         "pseudotime": 6,
         "val": 5,
         "id": 5
       },
       {
-        "group": "M1",
+        "group": "M1 (root)",
         "pseudotime": 0,
         "val": 3,
         "id": 6
       },
       {
-        "group": "M2",
+        "group": "M2 (leaf)",
         "pseudotime": 7,
         "val": 4,
         "id": 7
@@ -80,7 +80,7 @@ p {
         "id": 8
       },
       {
-        "group": "M4",
+        "group": "M4 (leaf)",
         "pseudotime": 7,
         "val": 4,
         "id": 9
@@ -92,7 +92,7 @@ p {
         "id": 10
       },
       {
-        "group": "M8",
+        "group": "M8 (leaf)",
         "pseudotime": 7,
         "val": 2,
         "id": 11
@@ -210,7 +210,7 @@ p {
       //.nodeVal(5) //size of nodes
       .graphData(gData)
       .nodeColor(d=>colors(d.pseudotime))
-      .nodeLabel(d=>d.group+'C'+d.id)
+      .nodeLabel(d=>d.group+' C'+d.id)
       .linkWidth('weight')
       .d3Force("link", d3.forceLink().distance(d => d.distance))
       .linkDirectionalArrowLength(10)

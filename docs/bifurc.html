@@ -210,15 +210,15 @@ p {
       //.nodeVal(5) //size of nodes
       .graphData(gData)
       .nodeColor(d=>colors(d.pseudotime))
-      .nodeLabel(d=>d.group)
+      .nodeLabel(d=>d.group+'C'+d.id)
       .linkWidth('weight')
       .d3Force("link", d3.forceLink().distance(d => d.distance))
       .linkDirectionalArrowLength(10)
       .linkColor(link => 'gray' )
-      .linkOpacity(0.5)
+      .linkOpacity(0.2)
       .d3Force("charge", d3.forceManyBody().theta(0.5).strength(-100))
-      .linkDirectionalParticles('weight')
-      .linkDirectionalParticleSpeed(d => d.weight*0.001)
+      .linkDirectionalParticles('val')
+      .linkDirectionalParticleSpeed(d => d.val*0.001)
       .linkDirectionalParticleWidth(3);
   </script>
 </body>

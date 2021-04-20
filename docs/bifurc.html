@@ -3,13 +3,13 @@
 <head>
 <style>
 body {
-    background-color: #5A87CD;font-family: courier; margin: 0
+    background-color: #0B2752;font-family: sans-serif; margin: 0
 }
 h1 {
-    background-color: #5A87CD;font-family: courier;
+    background-color: #0B2752;font-family: sans-serif;
 }
 p {
-    background-color: #5A87CD; font-family: courier;
+    background-color: #0B2752; font-family: sans-serif;
 }
 </style>
 <script src="https://unpkg.com/3d-force-graph"></script>
@@ -18,127 +18,201 @@ p {
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 </head>
 <body>
-  <h1>4-Leaf Multifurcation</h1>
-  <p>Interactive force directed layout</p>
+  <h1>    4-Leaf Multifurcation</h1>
+  <p> Interactive force directed layout of VIA graph colored by pseudotime</p>
   <div id="3d-graph"></div>
   <script>
   var gData = {
-      "nodes": [
-          {
-            "id": "id1",
-            "name": "name1",
-            "time": 1
-          },
-          {
-            "id": "id2",
-            "name": "name2",
-            "time": 3
-          },
-          {
-            "id": "id3",
-            "name": "name3",
-            "time": 6        },
-          {
-            "id": "id4",
-            "name": "name4",
-            "time": 6
-          },
-          {
-            "id": "id5",
-            "name": "name3",
-            "time": 10
-          },
-          {
-            "id": "id6",
-            "name": "name4",
-            "time": 10
-          },
-          {
-            "id": "id7",
-            "name": "name3",
-            "time": 10
-          },
-          {
-            "id": "id8",
-            "name": "name4",
-            "timete": 10
-          },
-      ],
-      "links": [
-          {
-              "source": "id1",
-              "target": "id2",
-              "distance":100,
-              "width": 1
-
-          },
-          {
-              "source": "id2",
-              "target": "id3",
-              "distance":100,
-              "width": 2
-
-          },
-          {
-              "source": "id2",
-              "target": "id4",
-              "distance":100,
-              "width": 2
-
-          },
-          {
-              "source": "id4",
-              "target": "id5",
-              "distance":20,
-              "width": 2
-
-          },
-          {
-              "source": "id4",
-              "target": "id7",
-              "distance":20,
-              "width": 2
-
-          },
-          {
-              "source": "id3",
-              "target": "id6",
-              "distance":20,
-              "width": 2
-
-          },
-          {
-              "source": "id3",
-              "target": "id8",
-              "distance":20,
-              "width": 2
-
-          },
-          {
-              "source": "id7",
-              "target": "id5",
-              "distance":10,
-              "width": 2
-
-          },
-
-      ]
+    "nodes": [
+      {
+        "group": "M3",
+        "pseudotime": 2,
+        "val": 9,
+        "id": 0
+      },
+      {
+        "group": "M5",
+        "pseudotime": 5,
+        "val": 7,
+        "id": 1
+      },
+      {
+        "group": "M7",
+        "pseudotime": 5,
+        "val": 7,
+        "id": 2
+      },
+      {
+        "group": "M3",
+        "pseudotime": 1,
+        "val": 4,
+        "id": 3
+      },
+      {
+        "group": "M7",
+        "pseudotime": 6,
+        "val": 5,
+        "id": 4
+      },
+      {
+        "group": "M6",
+        "pseudotime": 6,
+        "val": 5,
+        "id": 5
+      },
+      {
+        "group": "M1",
+        "pseudotime": 0,
+        "val": 3,
+        "id": 6
+      },
+      {
+        "group": "M2",
+        "pseudotime": 7,
+        "val": 4,
+        "id": 7
+      },
+      {
+        "group": "M5",
+        "pseudotime": 6,
+        "val": 4,
+        "id": 8
+      },
+      {
+        "group": "M4",
+        "pseudotime": 7,
+        "val": 4,
+        "id": 9
+      },
+      {
+        "group": "M5",
+        "pseudotime": 4,
+        "val": 4,
+        "id": 10
+      },
+      {
+        "group": "M8",
+        "pseudotime": 7,
+        "val": 2,
+        "id": 11
+      },
+      {
+        "group": "M3",
+        "pseudotime": 4,
+        "val": 3,
+        "id": 12
+      }
+    ],
+    "links": [
+      {
+        "weight": 4.0,
+        "width": 4.0,
+        "distance": 25.0,
+        "source": 0,
+        "target": 12.0
+      },
+      {
+        "weight": 1.0,
+        "width": 1.0,
+        "distance": 100.0,
+        "source": 0,
+        "target": 10.0
+      },
+      {
+        "weight": 2.75,
+        "width": 2.75,
+        "distance": 36.36363636,
+        "source": 1,
+        "target": 8.0
+      },
+      {
+        "weight": 1.0,
+        "width": 1.0,
+        "distance": 100.0,
+        "source": 1,
+        "target": 5.0
+      },
+      {
+        "weight": 4.0,
+        "width": 4.0,
+        "distance": 25.0,
+        "source": 2,
+        "target": 4.0
+      },
+      {
+        "weight": 1.5,
+        "width": 1.5,
+        "distance": 66.66666667,
+        "source": 3,
+        "target": 0.0
+      },
+      {
+        "weight": 1.0,
+        "width": 1.0,
+        "distance": 100.0,
+        "source": 4,
+        "target": 11.0
+      },
+      {
+        "weight": 1.0,
+        "width": 1.0,
+        "distance": 100.0,
+        "source": 4,
+        "target": 7.0
+      },
+      {
+        "weight": 1.5,
+        "width": 1.5,
+        "distance": 66.66666667,
+        "source": 6,
+        "target": 3.0
+      },
+      {
+        "weight": 2.75,
+        "width": 2.75,
+        "distance": 36.36363636,
+        "source": 8,
+        "target": 9.0
+      },
+      {
+        "weight": 2.75,
+        "width": 2.75,
+        "distance": 36.36363636,
+        "source": 10,
+        "target": 1.0
+      },
+      {
+        "weight": 1.5,
+        "width": 1.5,
+        "distance": 66.66666667,
+        "source": 11,
+        "target": 7.0
+      },
+      {
+        "weight": 1.5,
+        "width": 1.5,
+        "distance": 66.66666667,
+        "source": 12,
+        "target": 2.0
+      }
+    ]
   }
-    var colors = d3.scaleSequential().domain([1,10])
+    var colors = d3.scaleSequential().domain([10,1])
       .interpolator(d3.interpolateViridis);
     const Graph = ForceGraph3D({ controlType: 'orbit' })
     (document.getElementById('3d-graph'))
       //.jsonUrl('https://raw.githubusercontent.com/vasturiano/3d-force-graph/master/example/datasets/miserables.json')
       //.jsonUrl('file://localhost/home/shobi/JavaCode/basicgraph/bifurc.json')
       //https://stackoverflow.com/questions/50360821/how-do-i-influence-link-distance-in-3d-force-graph
-      .backgroundColor("#0B2752")
       .nodeLabel('id')
       //.nodeAutoColorBy('val')
-      .nodeVal(5) //size of nodes
+      //.nodeVal(5) //size of nodes
       .graphData(gData)
-      .nodeColor(d=>colors(d.time))
+      .nodeColor(d=>colors(d.pseudotime))
+      .nodeLabel(d=>d.group)
       .linkWidth('width')
       .d3Force("link", d3.forceLink().distance(d => d.distance))
+      .linkDirectionalArrowLength(10)
       .d3Force("charge", d3.forceManyBody().theta(0.5).strength(-100));
   </script>
 </body>

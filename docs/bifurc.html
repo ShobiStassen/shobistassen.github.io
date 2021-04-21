@@ -1,19 +1,36 @@
 <!DOCTYPE html>
 <html>
-  <head>
-     <style> body { margin: 0;} </style>
-     <script src="https://unpkg.com/3d-force-graph"></script>
-     <script src="https://d3js.org/d3.v4.min.js"></script>
-      <!--<script src="bifurc_fromNX.js"></script>-->
+<head>
+<style>
 
-     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-     <!--<script src="../../dist/3d-force-graph.js"></script>-->
+body {
+       background-color: #0B2752;font-family: sans-serif;  margin: 0
+   }
+h1 {
+       background-color: #0B2752;font-family: sans-serif;
+   }
+p {
+       background-color: #0B2752; font-family: sans-serif;
+   }
+</style>
+<script src="https://unpkg.com/3d-force-graph"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<!--<script src="bifurc_fromNX.js"></script>-->
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<!--<script src="../../dist/3d-force-graph.js"></script>-->
 
-  </head>
+</head>
 
-  <body>
+<body>
+  <h1 style="color: white;"> 4-Leaf Multifurcation</h1>
+  <p style="color:white; font-size:20px;">Interactive force directed layout of VIA graph colored by pseudotime</p>
   <div id="3d-graph"></div>
-
+  <div style = "position: absolute;   top: 0;   padding: 5px;  right: 0; color: slategrey;">
+      Dimensions:
+      <input type="radio" name="num-dimensions" onChange="toggleDimensions(1)"> 1D
+      <input type="radio" name="num-dimensions" onChange="toggleDimensions(2)"> 2D
+      <input type="radio" name="num-dimensions" onChange="toggleDimensions(3)" checked> 3D
+  </div>
   <script>
     /*
 
@@ -47,8 +64,11 @@
       "#FFFFBF", "#FEE08B", "#FDAE61", "#F46D43", "#D53E4F", "#9E0142"]);
     */
 
+    let curDataSetIdx,
+    	numDim = 3;
     var colors = d3.scaleSequential().domain([10,1])
       .interpolator(d3.interpolateViridis);
+    
     const Graph = ForceGraph3D({ controlType: 'orbit' })
       (document.getElementById('3d-graph'));
       //.jsonUrl('https://raw.githubusercontent.com/vasturiano/3d-force-graph/master/example/datasets/miserables.json')
@@ -73,14 +93,15 @@
       */
     const dataSet = function(Graph) {
         Graph
-          .nodeLabel('id')
-          .nodeAutoColorBy('group')
-          .nodeLabel('id')
+          //.nodeAutoColorBy('group')
+          //.nodeLabel('id')
           //.nodeAutoColorBy('val')
           //.nodeVal(5) //size of nodes
           //.graphData(gData)
           .nodeColor(d=>colors(d.pseudotime))
-          .nodeLabel(d=>d.group+'C'+d.id)
+          //.nodeColor(d=>colors(d.group_num))
+          //.nodeColor(d=>d.group)
+          .nodeLabel(d=>d.group+' Cluster'+d.id)
           .linkWidth('weight')
           .d3Force("link", d3.forceLink().distance(d => d.distance))
           .linkDirectionalArrowLength(10)
@@ -93,6 +114,10 @@
           .jsonUrl('https://raw.githubusercontent.com/ShobiStassen/shobistassen.github.io/main/Examples/bifurc.js');
     };
     dataSet(Graph);
+    const toggleDimensions = function(numDimensions) {
+    	numDim = numDimensions;
+    	Graph.numDimensions(numDim);
+    };
   </script>
   </body>
 </html>

@@ -25,12 +25,19 @@ p {
   <h1 style="color: white;"> 4-Leaf Multifurcation</h1>
   <p style="color:white; font-size:20px;">Interactive force directed layout of VIA graph colored by pseudotime</p>
   <div id="3d-graph"></div>
-  <div style = "position: absolute;   top: 0;   padding: 5px;  right: 0; color: slategrey;">
+  <div style = "position: absolute;   top: 0;   padding: 30px;  right: 0; color: slategrey;">
+      Color:
+      <input type="radio" name="color_scheme_" onChange="toggleColor1()" checked> Group
+      <input type="radio" name="color_scheme_" onChange="toggleColor2()"> VIA Pseudotime
+
+  </div>
+  <div style = "position: absolute; top: 0;   padding: 5px;  right: 0; color: slategrey;">
       Dimensions:
       <input type="radio" name="num-dimensions" onChange="toggleDimensions(1)"> 1D
       <input type="radio" name="num-dimensions" onChange="toggleDimensions(2)"> 2D
       <input type="radio" name="num-dimensions" onChange="toggleDimensions(3)" checked> 3D
   </div>
+
   <script>
     /*
 
@@ -64,11 +71,13 @@ p {
       "#FFFFBF", "#FEE08B", "#FDAE61", "#F46D43", "#D53E4F", "#9E0142"]);
     */
 
-    let curDataSetIdx,
+    let curDataSetIdx, curColor = 'group',
     	numDim = 3;
+
     var colors = d3.scaleSequential().domain([10,1])
       .interpolator(d3.interpolateViridis);
-    
+    var colors_group = d3.scaleSequential().domain([0,10])
+      .interpolator(d3.interpolateRainbow);
     const Graph = ForceGraph3D({ controlType: 'orbit' })
       (document.getElementById('3d-graph'));
       //.jsonUrl('https://raw.githubusercontent.com/vasturiano/3d-force-graph/master/example/datasets/miserables.json')
@@ -91,33 +100,48 @@ p {
       .linkDirectionalParticleSpeed(d => d.val*0.001)
       .linkDirectionalParticleWidth(3);
       */
-    const dataSet = function(Graph) {
-        Graph
-          //.nodeAutoColorBy('group')
-          //.nodeLabel('id')
-          //.nodeAutoColorBy('val')
-          //.nodeVal(5) //size of nodes
-          //.graphData(gData)
-          .nodeColor(d=>colors(d.pseudotime))
-          //.nodeColor(d=>colors(d.group_num))
-          //.nodeColor(d=>d.group)
-          .nodeLabel(d=>d.group+' Cluster'+d.id)
-          .linkWidth('weight')
-          .d3Force("link", d3.forceLink().distance(d => d.distance))
-          .linkDirectionalArrowLength(10)
-          .linkColor(link => 'gray' )
-          .linkOpacity(0.2)
-          .d3Force("charge", d3.forceManyBody().theta(0.5).strength(-100))
-          .linkDirectionalParticles('val')
-          .linkDirectionalParticleSpeed(d => d.val*0.001)
-          .linkDirectionalParticleWidth(3)
-          .jsonUrl('https://raw.githubusercontent.com/ShobiStassen/shobistassen.github.io/main/Examples/bifurc.js');
-    };
-    dataSet(Graph);
+
+      const dataSet = function(Graph) {
+          Graph
+            //.nodeAutoColorBy('group')
+            //.nodeLabel('id')
+            //.nodeAutoColorBy('val')
+            //.nodeVal(5) //size of nodes
+            //.graphData(gData)
+            .nodeAutoColorBy('group')
+
+            //.nodeColor(d=>colors(d.group_num))
+            //.nodeColor(d=>d.group)
+            .nodeLabel(d=>d.group+' Cluster'+d.id)
+            .linkWidth('weight')
+            .d3Force("link", d3.forceLink().distance(d => d.distance))
+            .linkDirectionalArrowLength(10)
+            .linkColor(link => 'gray' )
+            .linkOpacity(0.2)
+            .d3Force("charge", d3.forceManyBody().theta(0.5).strength(-100))
+            .linkDirectionalParticles('val')
+            .linkDirectionalParticleSpeed(d => d.val*0.001)
+            .linkDirectionalParticleWidth(3)
+            .jsonUrl('https://raw.githubusercontent.com/ShobiStassen/shobistassen.github.io/main/Examples/bifurc.js');
+      };
+      dataSet(Graph);
+
+
+
     const toggleDimensions = function(numDimensions) {
     	numDim = numDimensions;
     	Graph.numDimensions(numDim);
     };
+    const toggleColor1 = function() {
+      	Graph.nodeColor(d=>colors_group(d.group_num));
+        //Graph.nodeAutoColorBy('group') // for some reasons this doesnt work
+        //dataSet(Graph);
+      };
+    const toggleColor2 = function() {
+        Graph.nodeColor(d=>colors(d.pseudotime));
+        //dataSet(Graph);
+    };
+
   </script>
   </body>
 </html>

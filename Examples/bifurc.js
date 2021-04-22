@@ -36,21 +36,21 @@
       "id": 4
     },
     {
-      "group": "M6",
+      "group": "M6 (leaf)",
       "pseudotime": 6,
       "val": 5,
       "group_num": 3,
       "id": 5
     },
     {
-      "group": "M1",
+      "group": "M1 (Root)",
       "pseudotime": 0,
       "val": 3,
       "group_num": 4,
       "id": 6
     },
     {
-      "group": "M2",
+      "group": "M2 (leaf)",
       "pseudotime": 7,
       "val": 4,
       "group_num": 5,
@@ -64,7 +64,7 @@
       "id": 8
     },
     {
-      "group": "M4",
+      "group": "M4 (leaf)",
       "pseudotime": 7,
       "val": 4,
       "group_num": 6,
@@ -78,7 +78,7 @@
       "id": 10
     },
     {
-      "group": "M8",
+      "group": "M8 (leaf)",
       "pseudotime": 7,
       "val": 2,
       "group_num": 7,

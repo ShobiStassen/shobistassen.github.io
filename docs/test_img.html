@@ -119,7 +119,52 @@ p {
         this.EdgeWidth = 2
         this.Force = -200
       };
-       const settings = new Settings();
+      //Define GUI
+        const gui = new dat.GUI({ autoPlace: false });
+        var GUIContainer = document.getElementById('my-gui-container');
+        GUIContainer.appendChild(gui.domElement);
+        //const gui = new dat.GUI( {autoPlace: false, } );
+        const settings = new Settings();
+
+        const controllerOne = gui.add(settings, 'DistanceMultiple', 0.2, 5);
+        const controllerTwo = gui.add(settings, 'LinkOpacity', 0, 1);
+        const controllerThree = gui.add(settings, 'NodeSize', 1, 20);
+        const controllerFour = gui.add(settings, 'EdgeWidth', 0.5, 5);
+        const controllerFive = gui.add(settings, 'Force', -500, 10);
+
+
+        controllerOne.onChange(updateLinkDistance);
+        controllerTwo.onChange(updateOpacity);
+        controllerThree.onChange(updateNodeSize);
+        controllerFour.onChange(updateEdgeWidth);
+        controllerFive.onChange(updateForce);
+
+        function updateNodeSize() {
+            Graph.nodeRelSize(settings.NodeSize);
+            Graph.numDimensions(3); // Re-heat simulation
+        }
+        function updateEdgeWidth() {
+            Graph.linkWidth(d => d.weight*settings.EdgeWidth)
+            Graph.numDimensions(3); // Re-heat simulation
+        }
+        function updateLinkDistance() {
+            Graph.d3Force("link", d3.forceLink().distance(d => d.distance*settings.DistanceMultiple));
+            Graph.numDimensions(3); // Re-heat simulation
+        }
+        function updateOpacity() {
+            //Graph.d3Force("charge", d3.forceManyBody().theta(0.5).strength(settings.Force));
+            //Graph.numDimensions(3);
+
+            Graph.linkOpacity(settings.LinkOpacity)
+            //Graph.numDimensions(3); // Re-heat simulation
+        }
+        function updateForce() {
+          var Graph = ForceGraph3D({ controlType: 'orbit' })
+        (document.getElementById('3d-graph'));
+          dataSet(Graph)
+          Graph.d3Force("charge", d3.forceManyBody().theta(0.5).strength(settings.Force))
+        }
+
        const dataSet = function(Graph ) {
 
           Graph
@@ -142,8 +187,6 @@ p {
             .linkDirectionalParticles('val')
             .linkDirectionalParticleSpeed(d => d.val*0.001)
             .linkDirectionalParticleWidth(3)
-
-
 						.jsonUrl('https://raw.githubusercontent.com/ShobiStassen/shobistassen.github.io/main/Examples/faced_v0_temp.js');
       };
           dataSet(Graph)
@@ -155,13 +198,21 @@ p {
     	Graph.numDimensions(numDim);
     };
     const toggleColor = function(toggle_color) {
-     if (toggle_color==1) {
-  	      Graph.nodeColor(d=>colors_group(d.group_num));}
+      if (toggle_color==1) {
+  	       //const Graph = ForceGraph3D({ controlType: 'orbit' })
+        //(document.getElementById('3d-graph'));
+  	      //dataSet(Graph)
+  	      Graph.nodeColor(d=>colors_group(d.group_num));
+          }
 
-     if (toggle_color==2){
-  	      Graph.nodeColor(d=>colors(d.pseudotime));  }
-     if (toggle_color==3){
-        var Graph = ForceGraph3D({ controlType: 'orbit' })
+        if (toggle_color==2){
+  	      //const Graph = ForceGraph3D({ controlType: 'orbit' })
+        //(document.getElementById('3d-graph'));
+        //dataSet(Graph)
+  	      Graph.nodeColor(d=>colors(d.pseudotime));
+        }
+      if (toggle_color==3){
+        const Graph = ForceGraph3D({ controlType: 'orbit' })
       (document.getElementById('3d-graph'));
         dataSet(Graph)
         Graph.nodeThreeObject( node => {
@@ -174,50 +225,7 @@ p {
     };
 
 
-    //Define GUI
-      const gui = new dat.GUI({ autoPlace: false });
-      var GUIContainer = document.getElementById('my-gui-container');
-      GUIContainer.appendChild(gui.domElement);
-      //const gui = new dat.GUI( {autoPlace: false, } );
 
-
-      const controllerOne = gui.add(settings, 'DistanceMultiple', 0.2, 5);
-      const controllerTwo = gui.add(settings, 'LinkOpacity', 0, 1);
-      const controllerThree = gui.add(settings, 'NodeSize', 1, 20);
-      const controllerFour = gui.add(settings, 'EdgeWidth', 0.5, 5);
-      const controllerFive = gui.add(settings, 'Force', -500, 10);
-
-
-      controllerOne.onChange(updateLinkDistance);
-      controllerTwo.onChange(updateOpacity);
-      controllerThree.onChange(updateNodeSize);
-      controllerFour.onChange(updateEdgeWidth);
-      controllerFive.onChange(updateForce);
-
-      function updateNodeSize() {
-          Graph.nodeRelSize(settings.NodeSize);
-          Graph.numDimensions(3); // Re-heat simulation
-      }
-      function updateEdgeWidth() {
-          Graph.linkWidth(d => d.weight*settings.EdgeWidth)
-          Graph.numDimensions(3); // Re-heat simulation
-      }
-      function updateLinkDistance() {
-          Graph.d3Force("link", d3.forceLink().distance(d => d.distance*settings.DistanceMultiple));
-          Graph.numDimensions(3); // Re-heat simulation
-      }
-      function updateOpacity() {
-          //Graph.d3Force("charge", d3.forceManyBody().theta(0.5).strength(settings.Force));
-          //Graph.numDimensions(3);
-          Graph.linkOpacity(settings.LinkOpacity)
-          //Graph.numDimensions(3); // Re-heat simulation
-      }
-      function updateForce() {
-        var Graph = ForceGraph3D({ controlType: 'orbit' })
-      (document.getElementById('3d-graph'));
-        dataSet(Graph)
-        Graph.d3Force("charge", d3.forceManyBody().theta(0.5).strength(settings.Force))
-      }
   </script>
   </body>
 </html>

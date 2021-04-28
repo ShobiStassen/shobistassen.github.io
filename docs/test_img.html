@@ -202,15 +202,13 @@ p {
 
         if (toggle_color==2){    Graph.nodeColor(d=>colors(d.pseudotime));     }
       if (toggle_color==3){
-        const Graph = ForceGraph3D({ controlType: 'orbit' })
-      (document.getElementById('3d-graph'));
-        dataSet(Graph)
         Graph.nodeThreeObject( node => {
         const imgTexture = new THREE.TextureLoader().load(`./imgs/${node.img}`);
         const material = new THREE.SpriteMaterial({ map: imgTexture });
         const sprite = new THREE.Sprite(material);
         sprite.scale.set(32, 32);
         return sprite;
+	// const Graph = ForceGraph3D({ controlType: 'orbit' })(document.getElementById('3d-graph')); dataSet(Graph)
       })}
     };
 

@@ -117,9 +117,10 @@ p {
         this.LinkOpacity = 0.4
         this.NodeSize = 8 //scaling factor (multiple)
         this.EdgeWidth = 2
+        this.Force = -200
       };
        const settings = new Settings();
-      const dataSet = function(Graph ) {
+       const dataSet = function(Graph ) {
 
           Graph
             //.nodeAutoColorBy('group')
@@ -137,11 +138,13 @@ p {
             .linkDirectionalArrowLength(15)
             .linkColor(link => 'gray' )
             .linkOpacity(settings.LinkOpacity)
-            .d3Force("charge", d3.forceManyBody().theta(0.5).strength(-300))
+            .d3Force("charge", d3.forceManyBody().theta(0.5).strength(settings.Force))
             .linkDirectionalParticles('val')
             .linkDirectionalParticleSpeed(d => d.val*0.001)
             .linkDirectionalParticleWidth(3)
-      	    .jsonUrl('https://raw.githubusercontent.com/ShobiStassen/shobistassen.github.io/main/Examples/faced_v0_temp.js');
+
+
+						.jsonUrl('https://raw.githubusercontent.com/ShobiStassen/shobistassen.github.io/main/Examples/faced_v0_temp.js');
       };
           dataSet(Graph)
 
@@ -153,24 +156,24 @@ p {
     };
     const toggleColor = function(toggle_color) {
       if (toggle_color==1) {
-	       var Graph = ForceGraph3D({ controlType: 'orbit' })
-      (document.getElementById('3d-graph'));
-	      dataSet(Graph)
-	      Graph.nodeColor(d=>colors_group(d.group_num));}
-      if (toggle_color==2){
-	      var Graph = ForceGraph3D({ controlType: 'orbit' })
-      (document.getElementById('3d-graph'));
-	      dataSet(Graph)
-	      Graph.nodeColor(d=>colors(d.pseudotime));}
+  	       var Graph = ForceGraph3D({ controlType: 'orbit' })
+        (document.getElementById('3d-graph'));
+  	      dataSet(Graph)
+  	      Graph.nodeColor(d=>colors_group(d.group_num));}
+        if (toggle_color==2){
+  	      var Graph = ForceGraph3D({ controlType: 'orbit' })
+        (document.getElementById('3d-graph'));
+  	      dataSet(Graph)
+  	      Graph.nodeColor(d=>colors(d.pseudotime));}
       if (toggle_color==3){
-	      var Graph = ForceGraph3D({ controlType: 'orbit' })
+        var Graph = ForceGraph3D({ controlType: 'orbit' })
       (document.getElementById('3d-graph'));
         dataSet(Graph)
         Graph.nodeThreeObject( node => {
         const imgTexture = new THREE.TextureLoader().load(`./imgs/${node.img}`);
         const material = new THREE.SpriteMaterial({ map: imgTexture });
         const sprite = new THREE.Sprite(material);
-        sprite.scale.set(40, 40,1);
+        sprite.scale.set(12, 12);
         return sprite;
       })}
     };
@@ -187,12 +190,14 @@ p {
       const controllerTwo = gui.add(settings, 'LinkOpacity', 0, 1);
       const controllerThree = gui.add(settings, 'NodeSize', 1, 20);
       const controllerFour = gui.add(settings, 'EdgeWidth', 0.5, 5);
+      const controllerFive = gui.add(settings, 'Force', -500, 10);
 
 
       controllerOne.onChange(updateLinkDistance);
       controllerTwo.onChange(updateOpacity);
       controllerThree.onChange(updateNodeSize);
       controllerFour.onChange(updateEdgeWidth);
+      controllerFive.onChange(updateForce);
 
       function updateNodeSize() {
           Graph.nodeRelSize(settings.NodeSize);
@@ -211,6 +216,12 @@ p {
           //Graph.numDimensions(3);
           Graph.linkOpacity(settings.LinkOpacity)
           //Graph.numDimensions(3); // Re-heat simulation
+      }
+      function updateForce() {
+        var Graph = ForceGraph3D({ controlType: 'orbit' })
+      (document.getElementById('3d-graph'));
+        dataSet(Graph)
+        Graph.d3Force("charge", d3.forceManyBody().theta(0.5).strength(settings.Force))
       }
   </script>
   </body>

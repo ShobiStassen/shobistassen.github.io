@@ -126,6 +126,13 @@ p {
             //.nodeAutoColorBy('val')
             //.nodeVal(5) //size of nodes
             //.graphData(gData)
+	   .nodeThreeObject( node => {
+              const imgTexture = new THREE.TextureLoader().load(`./imgs/${node.img}`);
+              const material = new THREE.SpriteMaterial({ map: imgTexture });
+              const sprite = new THREE.Sprite(material);
+              sprite.scale.set(32, 32,1);
+              return sprite;
+            })
             .nodeAutoColorBy('group')
             .nodeRelSize(settings.NodeSize) //default is 4
             //.nodeColor(d=>colors(d.group_num))
@@ -140,15 +147,7 @@ p {
             .linkDirectionalParticles('val')
             .linkDirectionalParticleSpeed(d => d.val*0.001)
             .linkDirectionalParticleWidth(3)
-            .nodeThreeObject( node => {
-              const imgTexture = new THREE.TextureLoader().load(`./imgs/${node.img}`);
-              const material = new THREE.SpriteMaterial({ map: imgTexture });
-              const sprite = new THREE.Sprite(material);
-              sprite.scale.set(32, 32);
-              return sprite;
-            })
-
-						.jsonUrl('https://raw.githubusercontent.com/ShobiStassen/shobistassen.github.io/main/Examples/faced_v0_temp.js');
+            .jsonUrl('https://raw.githubusercontent.com/ShobiStassen/shobistassen.github.io/main/Examples/faced_v0_temp.js');
       };
           dataSet(Graph)
 

@@ -1,4 +1,7 @@
-{
+var gData = {
+  "directed": true,
+  "multigraph": false,
+  "graph": {},
   "nodes": [
     {
       "group": "T2_M2",
@@ -6,7 +9,7 @@
       "val": 11.0,
       "group_num": 0,
       "id": 0,
-      "img":'cat.png'
+      "img":"cat.png"
     },
     {
       "group": "T2_M1",
@@ -14,7 +17,7 @@
       "val": 10.151943462897526,
       "group_num": 1,
       "id": 1,
-      "img":'cat.png'
+      "img":"cat.png"
     },
     {
       "group": "T2_M1",
@@ -22,7 +25,7 @@
       "val": 8.703180212014134,
       "group_num": 1,
       "id": 2,
-      "img":'cat.png'
+      "img":"cat.png"
     },
     {
       "group": "T2_M1",
@@ -30,7 +33,7 @@
       "val": 7.431095406360424,
       "group_num": 1,
       "id": 3,
-      "img":'cat.png'
+      "img":"cat.png"
     },
     {
       "group": "T2_M3",
@@ -38,7 +41,7 @@
       "val": 7.431095406360424,
       "group_num": 2,
       "id": 4,
-      "img":'cat.png'
+      "img":"cat.png"
     },
     {
       "group": "T2_M1",
@@ -46,7 +49,7 @@
       "val": 7.289752650176679,
       "group_num": 1,
       "id": 5,
-      "img":'cat.png'
+      "img":"cat.png"
     },
     {
       "group": "T2_M3",
@@ -54,7 +57,7 @@
       "val": 6.123674911660777,
       "group_num": 2,
       "id": 6,
-      "img":'cat.png'
+      "img":"cat.png"
     },
     {
       "group": "T2_M1",
@@ -62,7 +65,7 @@
       "val": 6.017667844522968,
       "group_num": 1,
       "id": 7,
-      "img":'cat.png'
+      "img":"cat.png"
     },
     {
       "group": "T2_M1",
@@ -70,7 +73,7 @@
       "val": 5.028268551236749,
       "group_num": 1,
       "id": 8,
-      "img":'cat.png'
+      "img":"cat.png"
     },
     {
       "group": "T2_M3",
@@ -78,7 +81,7 @@
       "val": 4.816254416961131,
       "group_num": 2,
       "id": 9,
-      "img":'cat.png'
+      "img":"cat.png"
     },
     {
       "group": "T2_M3",
@@ -86,7 +89,7 @@
       "val": 2.1307420494699647,
       "group_num": 2,
       "id": 10,
-      "img":'cat.png'
+      "img":"cat.png"
     },
     {
       "group": "T2_M3",
@@ -94,7 +97,7 @@
       "val": 1.353356890459364,
       "group_num": 2,
       "id": 11,
-      "img":'cat.png'
+      "img":"cat.png"
     },
     {
       "group": "T2_M2",
@@ -102,7 +105,7 @@
       "val": 1.0,
       "group_num": 0,
       "id": 12,
-      "img":'cat.png'
+      "img":"cat.png"
     }
   ],
   "links": [

@@ -1,4 +1,7 @@
-{
+var gData = {
+  "directed": true,
+  "multigraph": false,
+  "graph": {},
   "nodes": [
     {
       "group": "T2_M2",

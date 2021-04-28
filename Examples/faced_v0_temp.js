@@ -1,8 +1,5 @@
-var gData = {
-  "directed": true,
-  "multigraph": false,
-  "graph": {},
-  "nodes": [
+{
+ "nodes": [
     {
       "group": "T2_M2",
       "pseudotime": 5.351792071146427,

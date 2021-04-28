@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#my-gui-container {
+	position: absolute;
+    right: 10px;   /* position inside relatively positioned parent */
+	top: 80px;
+    z-index: 0;   /* adjust as needed */
+}
+body {
+       background-color: #0B2752;font-family: sans-serif;  margin: 0
+   }
+h1 {
+       background-color: #0B2752;font-family: sans-serif;
+   }
+p {
+       background-color: #0B2752; font-family: sans-serif;
+   }
+</style>
+<script src="https://unpkg.com/3d-force-graph"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://unpkg.com/dat.gui"></script>
+<script src = "scRNA_Hema_via1_pc80knn30rs3.js"></script>
+<!--<script src="scRNA_Hema_via0_knn30PC80rs5.js"></script>-- scRNA_Hema_via0_knn30PC80rs5 and via0_knn30_PC80rs4 are good scRNA>
+<!--<script src="scATAC_BuenrostroPC_temp.js"></script>-->
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<!--<script src="../../dist/3d-force-graph.js"></script>-->
+
+</head>
+
+<body>
+  <h1 style="color: white;padding-left: 20px;"> Interactive VIA Graph </h1>
+  <!--<p style="color:white; font-size:20px;padding-left: 20px;">Interactive force directed layout of VIA graph colored by pseudotime or cell type</p>-->
+  <p style = "color: slategrey; font-size: 15px; padding-left: 20px; top: 0; padding-top: 15px;"> Left-click: rotate. Mouse-wheel: zoom. Right-click: pan. Click on node to drag and drop </p>
+  <div id="3d-graph"></div>
+  <div id="my-gui-container"></div>
+  <div style = "position: absolute;   top: 0;   padding-top: 40px; padding-right:10px;  right: 0; color: slategrey;">
+      Color:
+      <input type="radio" name="color_scheme_" onChange="toggleColor(1)" checked> Cell Type
+      <input type="radio" name="color_scheme_" onChange="toggleColor(2)"> VIA Pseudotime
+  </div>
+  <div style = "position: absolute;   top: 0;   padding-top: 65px; padding-left:20px;  left: 0;font-family: sans-serif; color: slategrey;">
+      Dataset:
+      <input type="radio" name="dataset_select" onChange="toggleDataset(1)" checked> scATAC Hemato
+      <input type="radio" name="dataset_select" onChange="toggleDataset(2)"> scRNA Hemato
+      <input type="radio" name="dataset_select" onChange="toggleDataset(3)"> Multifurcation
+  </div>
+  <div style = "position: absolute; top: 0;   padding-top: 15px; padding-right: 10px; right:0;color: slategrey;">
+      Dimensions:
+      <input type="radio" name="num-dimensions" onChange="toggleDimensions(1)"> 1D
+      <input type="radio" name="num-dimensions" onChange="toggleDimensions(2)"> 2D
+      <input type="radio" name="num-dimensions" onChange="toggleDimensions(3)" checked> 3D
+  </div>
+
+  <script>
+    /*
+
+    const gData = {
+        "nodes": [
+            {
+              "id": "id1",
+
+              "name": "name1",
+              "val": 1
+            },
+            {
+              "id": "id2",
+              "name": "name2",
+              "val": 2
+            },
+
+        ],
+        "links": [
+            {
+                "source": "id1",
+                "target": "id2"
+            },
+        ]
+    }
+    */
+    /*
+    var colors = d3.scaleQuantize()
+      .domain([0,10])
+      .range(["#5E4FA2", "#3288BD", "#66C2A5", "#ABDDA4", "#E6F598",
+      "#FFFFBF", "#FEE08B", "#FDAE61", "#F46D43", "#D53E4F", "#9E0142"]);
+    */
+
+    let curDataSetIdx, curColor = 'group',
+    	numDim = 3;
+
+    var colors = d3.scaleSequential().domain([10,0])
+      .interpolator(d3.interpolateViridis);
+    var colors_group = d3.scaleSequential().domain([0,10])
+      .interpolator(d3.interpolateRainbow);
+    const Graph = ForceGraph3D({ controlType: 'orbit' })
+      (document.getElementById('3d-graph'));
+      //.jsonUrl('https://raw.githubusercontent.com/vasturiano/3d-force-graph/master/example/datasets/miserables.json')
+      //.jsonUrl('file://localhost/home/shobi/JavaCode/basicgraph/bifurc.json')
+      //https://stackoverflow.com/questions/50360821/how-do-i-influence-link-distance-in-3d-force-graph
+      /*
+      .nodeLabel('id')
+      //.nodeAutoColorBy('val')
+      //.nodeVal(5) //size of nodes
+      .graphData(gData)
+      .nodeColor(d=>colors(d.pseudotime))
+      .nodeLabel(d=>d.group+'C'+d.id)
+      .linkWidth('weight')
+      .d3Force("link", d3.forceLink().distance(d => d.distance))
+      .linkDirectionalArrowLength(10)
+      .linkColor(link => 'gray' )
+      .linkOpacity(0.2)
+      .d3Force("charge", d3.forceManyBody().theta(0.5).strength(-100))
+      .linkDirectionalParticles('val')
+      .linkDirectionalParticleSpeed(d => d.val*0.001)
+      .linkDirectionalParticleWidth(3);
+      */
+      const Settings = function() {
+        this.DistanceMultiple = 1;
+        this.LinkOpacity = 0.4
+        this.NodeSize = 8 //scaling factor (multiple)
+        this.EdgeWidth = 2
+      };
+       const settings = new Settings();
+      const dataSet = function(Graph,url ) {
+
+          Graph
+            //.nodeAutoColorBy('group')
+            //.nodeLabel('id')
+            //.nodeAutoColorBy('val')
+            //.nodeVal(5) //size of nodes
+            //.graphData(gData)
+            .nodeAutoColorBy('group')
+            .nodeRelSize(settings.NodeSize) //default is 4
+            //.nodeColor(d=>colors(d.group_num))
+            //.nodeColor(d=>d.group)
+            .nodeLabel(d=>d.group+' Cluster'+d.id)
+            .linkWidth(d => d.weight*settings.EdgeWidth)
+            .d3Force("link", d3.forceLink().distance(d => d.distance))
+            .linkDirectionalArrowLength(15)
+            .linkColor(link => 'gray' )
+            .linkOpacity(settings.LinkOpacity)
+            .d3Force("charge", d3.forceManyBody().theta(0.5).strength(-300))
+            .linkDirectionalParticles('val')
+            .linkDirectionalParticleSpeed(d => d.val*0.001)
+            .linkDirectionalParticleWidth(3)
+						.jsonUrl(url);
+      };
+          dataSet(Graph,'https://raw.githubusercontent.com/ShobiStassen/shobistassen.github.io/main/Examples/scATAC_BuenrostroPC_KNN20_randomseed3.js');
+
+
+
+    const toggleDimensions = function(numDimensions) {
+    	numDim = numDimensions;
+    	Graph.numDimensions(numDim);
+    };
+    const toggleColor = function(toggle_color) {
+      if (toggle_color==1) {Graph.nodeColor(d=>colors_group(d.group_num));}
+      if (toggle_color==2){Graph.nodeColor(d=>colors(d.pseudotime));}
+    };
+    const toggleDataset = function(toggle_dataset){
+      if (toggle_dataset==1){
+    		dataSet(Graph,'https://raw.githubusercontent.com/ShobiStassen/shobistassen.github.io/main/Examples/scATAC_BuenrostroPC_KNN20_randomseed3.js');}//{Graph.jsonUrl('https://raw.githubusercontent.com/ShobiStassen/shobistassen.github.io/main/Examples/scATAC_BuenrostroPC_KNN20_randomseed3.js');}
+      if (toggle_dataset==2){
+				dataSet(Graph,'https://raw.githubusercontent.com/ShobiStassen/shobistassen.github.io/main/Examples/scRNA_Hema_via0_knn30pc80rs4.js');}
+      if (toggle_dataset==3){
+				dataSet(Graph,'https://raw.githubusercontent.com/ShobiStassen/shobistassen.github.io/main/Examples/bifurc.js'); }
+    };
+
+    //Define GUI
+      const gui = new dat.GUI({ autoPlace: false });
+      var GUIContainer = document.getElementById('my-gui-container');
+      GUIContainer.appendChild(gui.domElement);
+      //const gui = new dat.GUI( {autoPlace: false, } );
+
+
+      const controllerOne = gui.add(settings, 'DistanceMultiple', 0.2, 5);
+      const controllerTwo = gui.add(settings, 'LinkOpacity', 0, 1);
+      const controllerThree = gui.add(settings, 'NodeSize', 1, 20);
+      const controllerFour = gui.add(settings, 'EdgeWidth', 0.5, 5);
+
+
+      controllerOne.onChange(updateLinkDistance);
+      controllerTwo.onChange(updateOpacity);
+      controllerThree.onChange(updateNodeSize);
+      controllerFour.onChange(updateEdgeWidth);
+
+      function updateNodeSize() {
+          Graph.nodeRelSize(settings.NodeSize);
+          Graph.numDimensions(3); // Re-heat simulation
+      }
+      function updateEdgeWidth() {
+          Graph.linkWidth(d => d.weight*settings.EdgeWidth)
+          Graph.numDimensions(3); // Re-heat simulation
+      }
+      function updateLinkDistance() {
+          Graph.d3Force("link", d3.forceLink().distance(d => d.distance*settings.DistanceMultiple));
+          Graph.numDimensions(3); // Re-heat simulation
+      }
+      function updateOpacity() {
+          //Graph.d3Force("charge", d3.forceManyBody().theta(0.5).strength(settings.Force));
+          //Graph.numDimensions(3);
+          Graph.linkOpacity(settings.LinkOpacity)
+          //Graph.numDimensions(3); // Re-heat simulation
+      }
+  </script>
+  </body>
+</html>

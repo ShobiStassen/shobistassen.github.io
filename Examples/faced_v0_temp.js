@@ -5,7 +5,7 @@
       "pseudotime": 5.351792071146427,
       "val": 11.0,
       "group_num": 0,
-      "id": 0
+      "id": 0,
       "img":'cat.png'
     },
     {
@@ -13,7 +13,7 @@
       "pseudotime": 2.6335133746659514,
       "val": 10.151943462897526,
       "group_num": 1,
-      "id": 1
+      "id": 1,
       "img":'cat.png'
     },
     {
@@ -21,7 +21,7 @@
       "pseudotime": 3.942842679867115,
       "val": 8.703180212014134,
       "group_num": 1,
-      "id": 2
+      "id": 2,
       "img":'cat.png'
     },
     {
@@ -29,7 +29,7 @@
       "pseudotime": 3.461316624868184,
       "val": 7.431095406360424,
       "group_num": 1,
-      "id": 3
+      "id": 3,
       "img":'cat.png'
     },
     {
@@ -37,7 +37,7 @@
       "pseudotime": 9.896175918946204,
       "val": 7.431095406360424,
       "group_num": 2,
-      "id": 4
+      "id": 4,
       "img":'cat.png'
     },
     {
@@ -45,7 +45,7 @@
       "pseudotime": 0.7173543599091575,
       "val": 7.289752650176679,
       "group_num": 1,
-      "id": 5
+      "id": 5,
       "img":'cat.png'
     },
     {
@@ -53,7 +53,7 @@
       "pseudotime": 9.479990251342373,
       "val": 6.123674911660777,
       "group_num": 2,
-      "id": 6
+      "id": 6,
       "img":'cat.png'
     },
     {
@@ -61,7 +61,7 @@
       "pseudotime": 1.8492665407592832,
       "val": 6.017667844522968,
       "group_num": 1,
-      "id": 7
+      "id": 7,
       "img":'cat.png'
     },
     {
@@ -69,7 +69,7 @@
       "pseudotime": 0.0,
       "val": 5.028268551236749,
       "group_num": 1,
-      "id": 8
+      "id": 8,
       "img":'cat.png'
     },
     {
@@ -77,7 +77,7 @@
       "pseudotime": 7.3149339313546555,
       "val": 4.816254416961131,
       "group_num": 2,
-      "id": 9
+      "id": 9,
       "img":'cat.png'
     },
     {
@@ -85,7 +85,7 @@
       "pseudotime": 6.95015438562788,
       "val": 2.1307420494699647,
       "group_num": 2,
-      "id": 10
+      "id": 10,
       "img":'cat.png'
     },
     {
@@ -93,7 +93,7 @@
       "pseudotime": 10.0,
       "val": 1.353356890459364,
       "group_num": 2,
-      "id": 11
+      "id": 11,
       "img":'cat.png'
     },
     {
@@ -101,7 +101,7 @@
       "pseudotime": 8.335251556376418,
       "val": 1.0,
       "group_num": 0,
-      "id": 12
+      "id": 12,
       "img":'cat.png'
     }
   ],

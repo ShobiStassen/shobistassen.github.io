@@ -156,19 +156,11 @@ p {
     };
     const toggleColor = function(toggle_color) {
      if (toggle_color==1) {
-  	       //const Graph = ForceGraph3D({ controlType: 'orbit' })
-        //(document.getElementById('3d-graph'));
-  	      //dataSet(Graph)
-  	      Graph.nodeColor(d=>colors_group(d.group_num));
-          }
+  	      Graph.nodeColor(d=>colors_group(d.group_num));}
 
-        if (toggle_color==2){
-  	      //const Graph = ForceGraph3D({ controlType: 'orbit' })
-        //(document.getElementById('3d-graph'));
-        //dataSet(Graph)
-  	      Graph.nodeColor(d=>colors(d.pseudotime));
-        }
-      if (toggle_color==3){
+     if (toggle_color==2){
+  	      Graph.nodeColor(d=>colors(d.pseudotime));  }
+     if (toggle_color==3){
         var Graph = ForceGraph3D({ controlType: 'orbit' })
       (document.getElementById('3d-graph'));
         dataSet(Graph)

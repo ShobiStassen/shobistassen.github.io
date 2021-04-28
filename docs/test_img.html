@@ -198,9 +198,12 @@ p {
     	Graph.numDimensions(numDim);
     };
     const toggleColor = function(toggle_color) {
-      if (toggle_color==1) {     Graph.nodeColor(d=>colors_group(d.group_num));   }
+      if (toggle_color==1) {     
+	      Graph.nodeThreeObject(null);
+	      Graph.nodeColor(d=>colors_group(d.group_num));   }
 
-        if (toggle_color==2){    Graph.nodeColor(d=>colors(d.pseudotime));     }
+        if (toggle_color==2){   Graph.nodeThreeObject(null);
+			     Graph.nodeColor(d=>colors(d.pseudotime));     }
       if (toggle_color==3){
         Graph.nodeThreeObject( node => {
         const imgTexture = new THREE.TextureLoader().load(`./imgs/${node.img}`);

@@ -198,19 +198,9 @@ p {
     	Graph.numDimensions(numDim);
     };
     const toggleColor = function(toggle_color) {
-      if (toggle_color==1) {
-  	       //const Graph = ForceGraph3D({ controlType: 'orbit' })
-        //(document.getElementById('3d-graph'));
-  	      //dataSet(Graph)
-  	      Graph.nodeColor(d=>colors_group(d.group_num));
-          }
+      if (toggle_color==1) {     Graph.nodeColor(d=>colors_group(d.group_num));   }
 
-        if (toggle_color==2){
-  	      //const Graph = ForceGraph3D({ controlType: 'orbit' })
-        //(document.getElementById('3d-graph'));
-        //dataSet(Graph)
-  	      Graph.nodeColor(d=>colors(d.pseudotime));
-        }
+        if (toggle_color==2){    Graph.nodeColor(d=>colors(d.pseudotime));     }
       if (toggle_color==3){
         const Graph = ForceGraph3D({ controlType: 'orbit' })
       (document.getElementById('3d-graph'));

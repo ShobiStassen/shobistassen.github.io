@@ -178,9 +178,9 @@
       "target": 0
     },
     {
-      "weight": 1.0,
+      "weight": 2.0,
       "val": 4.17550505050505,
-      "distance": 150.0,
+      "distance": 100.0,
       "source": 3,
       "target": 5
     },

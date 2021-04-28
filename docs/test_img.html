@@ -40,6 +40,7 @@ p {
       Color:
       <input type="radio" name="color_scheme_" onChange="toggleColor(1)" checked> Cell Type
       <input type="radio" name="color_scheme_" onChange="toggleColor(2)"> VIA Pseudotime
+      <input type="radio" name="color_scheme_" onChange="toggleColor(3)"> Image
   </div>
 
   <div style = "position: absolute; top: 0;   padding-top: 15px; padding-right: 10px; right:0;color: slategrey;">
@@ -126,13 +127,6 @@ p {
             //.nodeAutoColorBy('val')
             //.nodeVal(5) //size of nodes
             //.graphData(gData)
-	   .nodeThreeObject( node => {
-              const imgTexture = new THREE.TextureLoader().load(`./imgs/${node.img}`);
-              const material = new THREE.SpriteMaterial({ map: imgTexture });
-              const sprite = new THREE.Sprite(material);
-              sprite.scale.set(32, 32,1);
-              return sprite;
-            })
             .nodeAutoColorBy('group')
             .nodeRelSize(settings.NodeSize) //default is 4
             //.nodeColor(d=>colors(d.group_num))
@@ -147,7 +141,9 @@ p {
             .linkDirectionalParticles('val')
             .linkDirectionalParticleSpeed(d => d.val*0.001)
             .linkDirectionalParticleWidth(3)
-            .jsonUrl('https://raw.githubusercontent.com/ShobiStassen/shobistassen.github.io/main/Examples/faced_v0_temp.js');
+      
+
+						.jsonUrl('https://raw.githubusercontent.com/ShobiStassen/shobistassen.github.io/main/Examples/faced_v0_temp.js');
       };
           dataSet(Graph)
 
@@ -160,6 +156,13 @@ p {
     const toggleColor = function(toggle_color) {
       if (toggle_color==1) {Graph.nodeColor(d=>colors_group(d.group_num));}
       if (toggle_color==2){Graph.nodeColor(d=>colors(d.pseudotime));}
+      if (toggle_color==3){Graph.nodeThreeObject( node => {
+        const imgTexture = new THREE.TextureLoader().load(`./imgs/${node.img}`);
+        const material = new THREE.SpriteMaterial({ map: imgTexture });
+        const sprite = new THREE.Sprite(material);
+        sprite.scale.set(12, 12);
+        return sprite;
+      })}
     };
 
 

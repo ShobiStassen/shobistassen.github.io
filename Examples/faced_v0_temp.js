@@ -2,6 +2,7 @@
   "nodes": [
     {
       "group": "T2_M2",
+      "img": "cat.png",
       "pseudotime": 6.118742008911964,
       "val": 11.0,
       "group_num": 0,
@@ -9,6 +10,7 @@
     },
     {
       "group": "T2_M1",
+      "img": "cat.png",
       "pseudotime": 3.154230859528852,
       "val": 10.151943462897526,
       "group_num": 1,
@@ -16,6 +18,7 @@
     },
     {
       "group": "T2_M1",
+      "img": "cat.png",
       "pseudotime": 4.613036375058111,
       "val": 8.703180212014134,
       "group_num": 1,
@@ -23,6 +26,7 @@
     },
     {
       "group": "T2_M1",
+      "img": "cat.png",
       "pseudotime": 4.317593723311393,
       "val": 7.431095406360424,
       "group_num": 1,
@@ -30,6 +34,7 @@
     },
     {
       "group": "T2_M3",
+      "img": "cat.png",
       "pseudotime": 9.610880938102843,
       "val": 7.431095406360424,
       "group_num": 2,
@@ -37,6 +42,7 @@
     },
     {
       "group": "T2_M1",
+      "img": "cat.png",
       "pseudotime": 0.8022066569290932,
       "val": 7.289752650176679,
       "group_num": 1,
@@ -44,6 +50,7 @@
     },
     {
       "group": "T2_M3",
+      "img": "cat.png",
       "pseudotime": 9.65221857286427,
       "val": 6.123674911660777,
       "group_num": 2,
@@ -51,6 +58,7 @@
     },
     {
       "group": "T2_M1",
+      "img": "cat.png",
       "pseudotime": 2.0680071277760086,
       "val": 6.017667844522968,
       "group_num": 1,
@@ -58,6 +66,7 @@
     },
     {
       "group": "T2_M1",
+      "img": "cat.png",
       "pseudotime": 0.0,
       "val": 5.028268551236749,
       "group_num": 1,
@@ -65,6 +74,7 @@
     },
     {
       "group": "T2_M3",
+      "img": "cat.png",
       "pseudotime": 8.533995836075126,
       "val": 4.816254416961131,
       "group_num": 2,
@@ -72,6 +82,7 @@
     },
     {
       "group": "T2_M3",
+      "img": "cat.png",
       "pseudotime": 7.128418469463697,
       "val": 2.1307420494699647,
       "group_num": 2,
@@ -79,6 +90,7 @@
     },
     {
       "group": "T2_M3",
+      "img": "cat.png",
       "pseudotime": 10.0,
       "val": 1.353356890459364,
       "group_num": 2,
@@ -86,6 +98,7 @@
     },
     {
       "group": "T2_M2",
+      "img": "cat.png",
       "pseudotime": 8.738618474999068,
       "val": 1.0,
       "group_num": 0,

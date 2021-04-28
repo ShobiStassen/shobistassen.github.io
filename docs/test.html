@@ -144,13 +144,7 @@ p {
             .linkDirectionalParticles('val')
             .linkDirectionalParticleSpeed(d => d.val*0.001)
             .linkDirectionalParticleWidth(3)
-            .nodeThreeObject(node => {
-              const imgTexture = new THREE.TextureLoader().load(`./imgs/${node.img}`);
-              const material = new THREE.SpriteMaterial({ map: imgTexture });
-              const sprite = new THREE.Sprite(material);
-              sprite.scale.set(12, 12);
-              return sprite;});
-
+          
       };
           dataSet(Graph);
 

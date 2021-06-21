@@ -10,7 +10,7 @@
     },
     {
       "group": "T2_M1",
-      "img": "1_fluo_G1.tif",
+      "img": "1_fluo_G1.jpg",
       "pseudotime": 3.154230859528852,
       "val": 10.151943462897526,
       "group_num": 1,

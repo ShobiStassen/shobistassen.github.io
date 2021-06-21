@@ -187,8 +187,15 @@ p {
             .linkDirectionalParticles('val')
             .linkDirectionalParticleSpeed(d => d.val*0.001)
             .linkDirectionalParticleWidth(3)
-						.jsonUrl('https://raw.githubusercontent.com/ShobiStassen/shobistassen.github.io/main/Examples/faced_v0_temp.js');
+	    .jsonUrl('https://raw.githubusercontent.com/ShobiStassen/shobistassen.github.io/main/Examples/faced_v0_temp.js');
       };
+	  Graph.nodeThreeObject( node => {
+        const imgTexture = new THREE.TextureLoader().load(`./imgs/${node.img}`);
+        const material = new THREE.SpriteMaterial({ map: imgTexture });
+        const sprite = new THREE.Sprite(material);
+        sprite.scale.set(32, 32);
+        return sprite;
+		  })
           dataSet(Graph)
 
 

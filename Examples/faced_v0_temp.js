@@ -1,7 +1,7 @@
 {
   "nodes": [
     {
-      "group": "T2_M2", //mb231
+      "group": "T2_M2", 
       "img": "4_fluo_S.tif",
       "pseudotime": 6.118742008911964,
       "val": 11.0,

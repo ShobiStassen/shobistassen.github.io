@@ -37,7 +37,7 @@
     },
     {
       "group": "GMP",
-      "pseudotime": 6.670056281639753,
+      "pseudotime": 5.670056281639753,
       "val": 8.435897435897436,
       "group_num": 3,
       "id": 5
@@ -170,7 +170,7 @@
     },
     {
       "group": "CLP",
-      "pseudotime": 10.0,
+      "pseudotime": 9.9,
       "val": 1.4273504273504274,
       "group_num": 7,
       "id": 24
